@@ -1,0 +1,16 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL_POSTGRES")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../../node_modules/@prisma/postgres-client"
+}
+
+model User {
+  id   String @id @default(uuid())
+  name String
+
+  @@map("users")
+}
