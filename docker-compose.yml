@@ -1,0 +1,31 @@
+services:
+  postgres:
+    container_name: pgdb
+    image: postgres:17
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: pgdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  mariadb:
+    image: mariadb:11
+    container_name: mdb
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: mariadb
+      MARIADB_DATABASE: mdb
+      MARIADB_USER: mariadb
+      MARIADB_PASSWORD: mariadb
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+volumes:
+  pg_data:
+  mariadb_data:
