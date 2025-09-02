@@ -14,18 +14,34 @@ services:
 
   mariadb:
     image: mariadb:11
-    container_name: mdb
+    container_name: mariadb
     restart: always
     environment:
       MARIADB_ROOT_PASSWORD: mariadb
-      MARIADB_DATABASE: mdb
-      MARIADB_USER: mariadb
-      MARIADB_PASSWORD: mariadb
+      MARIADB_DATABASE: mariadb
+      MARIADB_USER: user
+      MARIADB_PASSWORD: password
     ports:
       - "3306:3306"
     volumes:
       - mariadb_data:/var/lib/mysql
+      - ./prisma/mariadb/init:/docker-entrypoint-initdb.d
+  mysql:
+    image: mysql:8
+    container_name: mysqldb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_DATABASE: mysqldb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./prisma/mysql/init:/docker-entrypoint-initdb.d
 
 volumes:
   pg_data:
   mariadb_data:
+  mysql_data:
