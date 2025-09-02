@@ -1,0 +1,17 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL_MYSQL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL_MYSQL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../../node_modules/@prisma/mysql-client"
+}
+
+model Car {
+  id   String @id @default(uuid())
+  name String
+
+  @@map("cars")
+}
