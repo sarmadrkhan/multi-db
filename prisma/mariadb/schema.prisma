@@ -1,0 +1,16 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL_MARIADB")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../../node_modules/@prisma/mariadb-client"
+}
+
+model Product {
+  id   String @id @default(uuid())
+  name String
+
+  @@map("products")
+}
